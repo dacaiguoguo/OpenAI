@@ -28,10 +28,10 @@ public extension OpenAIProtocol {
     }
     
     func completionsStream(
-        query: CompletionsQuery
+        query: CompletionsQuery, header:[String: String]
     ) -> AsyncThrowingStream<CompletionsResult, Error> {
         return AsyncThrowingStream { continuation in
-            return completionsStream(query: query) { result in
+            return completionsStream(query: query, header:header) { result in
                 continuation.yield(with: result)
             } completion: { error in
                 continuation.finish(throwing: error)
@@ -115,10 +115,10 @@ public extension OpenAIProtocol {
     }
     
     func chatsStream(
-        query: ChatQuery
+        query: ChatQuery, header:[String: String]
     ) -> AsyncThrowingStream<ChatStreamResult, Error> {
         return AsyncThrowingStream { continuation in
-            return chatsStream(query: query)  { result in
+            return chatsStream(query: query, header: header)  { result in
                 continuation.yield(with: result)
             } completion: { error in
                 continuation.finish(throwing: error)

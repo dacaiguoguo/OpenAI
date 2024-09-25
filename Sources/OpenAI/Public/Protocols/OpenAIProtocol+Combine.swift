@@ -22,9 +22,9 @@ public extension OpenAIProtocol {
         .eraseToAnyPublisher()
     }
     
-    func completionsStream(query: CompletionsQuery) -> AnyPublisher<Result<CompletionsResult, Error>, Error> {
+    func completionsStream(query: CompletionsQuery, header:[String: String]) -> AnyPublisher<Result<CompletionsResult, Error>, Error> {
         let progress = PassthroughSubject<Result<CompletionsResult, Error>, Error>()
-        completionsStream(query: query) { result in
+        completionsStream(query: query, header:header) { result in
             progress.send(result)
         } completion: { error in
             if let error {
@@ -71,9 +71,9 @@ public extension OpenAIProtocol {
         .eraseToAnyPublisher()
     }
     
-    func chatsStream(query: ChatQuery) -> AnyPublisher<Result<ChatStreamResult, Error>, Error> {
+    func chatsStream(query: ChatQuery, header:[String: String]) -> AnyPublisher<Result<ChatStreamResult, Error>, Error> {
         let progress = PassthroughSubject<Result<ChatStreamResult, Error>, Error>()
-        chatsStream(query: query) { result in
+        chatsStream(query: query, header: header) { result in
             progress.send(result)
         } completion: { error in
             if let error {
