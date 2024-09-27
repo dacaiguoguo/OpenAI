@@ -29,6 +29,10 @@ extension JSONRequest: URLRequestBuildable {
         var request = URLRequest(url: url, timeoutInterval: timeoutInterval)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        // 设置所有传入的 header
+        for (key, value) in header {
+            request.setValue(value, forHTTPHeaderField: key)
+        }
         if let organizationIdentifier {
             request.setValue(organizationIdentifier, forHTTPHeaderField: "OpenAI-Organization")
         }
