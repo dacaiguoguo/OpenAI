@@ -64,9 +64,9 @@ public extension OpenAIProtocol {
         .eraseToAnyPublisher()
     }
 
-    func chats(query: ChatQuery) -> AnyPublisher<ChatResult, Error> {
+    func chats(query: ChatQuery,  header:[String: String]) -> AnyPublisher<ChatResult, Error> {
         Future<ChatResult, Error> {
-            chats(query: query, completion: $0)
+            chats(query: query, header: header, completion: $0)
         }
         .eraseToAnyPublisher()
     }

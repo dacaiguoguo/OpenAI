@@ -100,10 +100,10 @@ public extension OpenAIProtocol {
     }
     
     func chats(
-        query: ChatQuery
+        query: ChatQuery,  header:[String: String]
     ) async throws -> ChatResult {
         try await withCheckedThrowingContinuation { continuation in
-            chats(query: query) { result in
+            chats(query: query, header: header) { result in
                 switch result {
                 case let .success(success):
                     return continuation.resume(returning: success)
